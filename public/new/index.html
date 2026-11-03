@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panetones para Vender · Conceito visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,700..900,100,1&family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Conceito: fundo creme, painéis brancos muito arredondados, título retrô gordo, adesivos inclinados e etiqueta de preço amarela. */
+  /* Cores do design system Panetones para Vender (tema claro). */
+  :root {
+    --creme: #f3ede4;          /* surface-sunk: fundo entre os painéis */
+    --painel: #ffffff;         /* surface-raised */
+    --painel-quente: #f6efe4;  /* farinha: cartões dentro dos painéis */
+    --chocolate: #17110e;      /* ink */
+    --chocolate-2: #5f544c;    /* ink-muted */
+    --linha: #e6ddd0;          /* line */
+    --caramelo: #d9380f;       /* brasa: botão principal, texto on-brasa */
+    --caramelo-escuro: #c2310c;/* accent-text */
+    --accent: #c2310c;         /* accent-text: laranja como texto */
+    --tangerina: #f97316;      /* forno: só preenchimento, texto on-forno */
+    --lilas: #ffedd5;          /* forno-suave */
+    --amarelo: #f97316;        /* forno: etiqueta de preço e ícones */
+    --pistache: #65a30d;       /* pistache */
+    --pistache-escuro: #365314;
+    --folha: #4d7c0f;
+    --folha-text: #3f6212;
+    --folha-suave: #ecfccb;
+    --escuro-texto: #bdb1a6;   /* ink-muted do tema escuro, sobre ink */
+    --display: "Fraunces", "Georgia", serif;
+    --texto: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --raio-xl: 48px;
+    --raio-lg: 28px;
+    --raio-md: 20px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--creme); color: var(--chocolate); font-family: var(--texto); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--chocolate); outline-offset: 3px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .painel { background: var(--painel); border-radius: var(--raio-xl); padding: clamp(28px, 5vw, 64px) clamp(18px, 4vw, 56px); }
+  section { padding-block: clamp(14px, 2.5vw, 24px); }
+
+  /* Hierarquia: H1 uma vez, H2 por seção, H3 por cartão. */
+  .h1 { font-family: var(--display); font-variation-settings: "SOFT" 100, "WONK" 1; font-weight: 900; font-size: clamp(34px, 6.3vw, 84px); line-height: .95; letter-spacing: -.02em; text-transform: uppercase; margin: 0; text-wrap: balance; }
+  .h2 { font-family: var(--display); font-variation-settings: "SOFT" 100, "WONK" 1; font-weight: 900; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.02; letter-spacing: -.01em; text-transform: uppercase; text-align: center; margin: 0 auto 14px; max-width: 22ch; text-wrap: balance; overflow-wrap: break-word; }
+  .h2.longo { font-size: clamp(19px, 2.4vw, 30px); line-height: 1.08; max-width: 56ch; }
+  .h3 { font-family: var(--display); font-variation-settings: "SOFT" 100, "WONK" 1; font-weight: 800; font-size: clamp(18px, 2vw, 22px); line-height: 1.12; text-transform: uppercase; margin: 0 0 6px; }
+  .sub { font-size: clamp(16px, 1.6vw, 19px); font-weight: 500; color: var(--chocolate-2); text-align: center; max-width: 58ch; margin: 0 auto 32px; text-wrap: pretty; }
+  .txt { font-size: 15px; color: var(--chocolate-2); margin: 0; }
+  .just { text-align: justify; hyphens: auto; }
+  .legenda { font-size: 13px; color: var(--chocolate-2); text-align: center; margin: 16px auto 0; max-width: 62ch; }
+
+  /* Botões em pílula, caramelo com texto chocolate. */
+  .btn { display: inline-flex; align-items: center; gap: 10px; font: 800 15px/1 var(--texto); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; padding: 18px 30px; border-radius: 999px; background: var(--caramelo); color: #fff; border: 2px solid var(--chocolate); transition: transform 0.5s; }
+  .btn:hover { transform: translate(-2px, -2px); }
+  .btn { white-space: nowrap; max-width: 100%; }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .ic { width: 1.15em; height: 1.15em; flex: none; vertical-align: -0.22em; stroke-width: 2.2; }
+  .adesivo .ic, .selos .ic, .preco .ic, .incluso .ic { width: 1.05em; height: 1.05em; margin-right: 4px; }
+  .selos span { display: inline-flex; align-items: center; gap: 6px; }
+  .benef i .ic, .receber i .ic { width: 24px; height: 24px; vertical-align: 0; }
+  .escudo .ic { width: 64px; height: 64px; stroke-width: 1.8; }
+  .publico .ic { width: 1em; height: 1em; margin-right: 6px; vertical-align: -0.12em; }
+  .seta .ic { width: 20px; height: 20px; }
+  .hero-esq .btn { padding: 16px 22px; font-size: clamp(13px, 1.15vw, 15px); gap: 8px; }
+  .btn.escuro { background: var(--chocolate); color: var(--creme); }
+  .btn.off { background: var(--creme); color: var(--chocolate-2); border-style: dashed; cursor: not-allowed; }
+  .centro { text-align: center; }
+
+  /* Adesivos inclinados. */
+  .adesivo { display: inline-block; font: 800 14px/1 var(--texto); text-transform: uppercase; letter-spacing: .03em; padding: 10px 16px; border-radius: 12px; border: 2px solid var(--chocolate); color: var(--chocolate); white-space: nowrap; }
+  .adesivo.lilas { background: var(--lilas); transform: rotate(-6deg); }
+  .adesivo.tang { background: var(--tangerina); transform: rotate(5deg); }
+  .adesivo.pist { background: var(--pistache); transform: rotate(-3deg); }
+
+  /* Barra do topo. */
+  .topo { background: var(--caramelo); color: #fff; text-align: center; font: 700 clamp(14px, 1.35vw, 17px)/1.35 var(--texto); padding: 15px 16px; letter-spacing: .02em; }
+
+  /* Hero. */
+  .hero { position: relative; overflow: hidden; text-align: center; }
+  .hero .h1 span { color: var(--accent); }
+  .hero .stickers { position: relative; height: 0; }
+  .hero .stickers .adesivo { position: absolute; z-index: 2; }
+  .hero .stickers .s1 { left: 3%; top: -150px; }
+  .hero .stickers .s2 { right: 3%; top: -40px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr minmax(0, 1.25fr) 1fr; gap: 28px; align-items: center; margin-top: 28px; }
+  .hero-esq { text-align: left; }
+  .hero-esq .chamada { font-family: var(--display); font-variation-settings: "SOFT" 100, "WONK" 1; font-weight: 800; font-size: clamp(16px, 1.55vw, 19px); line-height: 1.2; text-transform: uppercase; margin: 0 0 22px; }
+  .hero-foto { position: relative; }
+  .hero-foto img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--raio-lg); }
+  .preco { position: relative; background: var(--amarelo); border-radius: 22px; padding: 20px 22px; text-align: center; border: 2px solid var(--chocolate); }
+  .preco::before { content: ""; position: absolute; left: -14px; top: 50%; width: 26px; height: 26px; background: var(--amarelo); border-left: 2px solid var(--chocolate); border-bottom: 2px solid var(--chocolate); transform: translateY(-50%) rotate(45deg); }
+  .preco b { display: block; font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 900; font-size: clamp(36px, 4.2vw, 54px); line-height: 1; }
+  .preco span { display: block; font-weight: 700; font-size: 15px; margin-top: 6px; }
+  .preco small { display: block; font-size: 12px; font-weight: 600; color: var(--chocolate); }
+  .hero-corpo { max-width: 62ch; margin: 30px auto 26px; }
+  .selos { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 22px; margin-top: 26px; font-weight: 600; font-size: 14px; color: var(--chocolate-2); }
+
+  /* Benefícios. */
+  .beneficios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 860px; margin: 0 auto 32px; }
+  .benef { display: flex; align-items: center; gap: 14px; background: var(--painel-quente); border: 2px solid var(--linha); border-radius: var(--raio-md); padding: 14px 16px; font-weight: 600; font-size: 15px; min-width: 0; }
+  .benef i { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--amarelo); font-style: normal; font-size: 22px; border: 2px solid var(--chocolate); }
+
+  /* Carrossel. */
+  .carrossel { position: relative; margin-top: 36px; }
+  .trilho { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+  .trilho::-webkit-scrollbar { display: none; }
+  .trilho img { scroll-snap-align: start; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--raio-md); }
+  .setas { display: flex; justify-content: center; align-items: center; gap: 18px; margin-top: 22px; }
+  .seta { width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--chocolate); background: var(--painel); display: grid; place-items: center; cursor: pointer; }
+  .seta svg { width: 20px; height: 20px; }
+  .pontos { display: flex; gap: 8px; }
+  .pontos b { width: 9px; height: 9px; border-radius: 50%; background: var(--tangerina); opacity: .4; }
+  .pontos b.on { opacity: 1; width: 22px; border-radius: 99px; }
+
+  /* Cartões de produto: foto sai por cima do cartão, como na referência. */
+  .cards { display: grid; gap: 22px; }
+  .c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card { position: relative; background: var(--painel-quente); border-radius: var(--raio-lg); padding: 0 18px 22px; text-align: center; margin-top: 56px; display: flex; flex-direction: column; align-items: center; }
+  .card img { width: 78%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin: -56px auto 16px; border: 6px solid var(--painel); }
+  .card .h3 { margin-top: 2px; }
+  /* Alinha foto, título e texto entre cartões da mesma linha (subgrid). */
+  .cards { row-gap: 0; }
+  .card { display: grid; grid-template-rows: subgrid; grid-row: span 3; align-content: start; justify-items: center; }
+  .card .h3 { align-self: start; }
+  .card .txt { align-self: start; }
+  .card .linha { width: 64%; border-top: 2px dashed var(--linha); margin: 14px auto 12px; }
+  .card .tag { display: inline-block; font: 700 12px/1 var(--texto); text-transform: uppercase; letter-spacing: .05em; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--chocolate); background: var(--painel); }
+
+  /* Depoimentos. */
+  .depo { display: flex; gap: 18px; justify-content: center; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .depo img { width: min(280px, 72%); flex: none; border-radius: var(--raio-md); scroll-snap-align: center; border: 1px solid var(--linha); }
+
+  /* Bloco escuro de materiais. */
+  .escuro { background: var(--chocolate); color: var(--creme); }
+  .escuro .h2, .escuro .h3 { color: var(--creme); }
+  .escuro .txt { color: var(--escuro-texto); }
+  .capas { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
+  .capa { text-align: center; }
+  .capa img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; margin-bottom: 14px; transform: rotate(-2deg); }
+  .capa:nth-child(even) img { transform: rotate(2deg); }
+  .capa .txt { font-size: 13px; }
+  /* Capas que seguem o mouse (só desktop com mouse). */
+  .capa { perspective: 800px; }
+  .capa img { transition: transform 0.66s cubic-bezier(.22,.61,.36,1); will-change: transform; }
+  .capa:hover img { transition-duration: 0.5s; }
+  .capa .h3 { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.1; text-wrap: balance; }
+
+  /* Público. */
+  .publico { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 900px; margin: 32px auto 0; }
+  .publico .bloco { background: var(--lilas); border: 2px solid var(--chocolate); border-radius: var(--raio-lg); padding: 24px; text-align: center; }
+  .publico .bloco:nth-child(2) { background: var(--folha-suave); }
+
+  /* Lista "perfeito para você". */
+  .lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 900px; margin: 0 auto; padding: 0; list-style: none; }
+  .lista li { display: flex; align-items: center; gap: 12px; background: var(--painel-quente); border-radius: 18px; padding: 14px 16px; font-weight: 600; font-size: 15px; }
+  .lista li::before { content: ""; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--pistache) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232a140c' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 15px no-repeat; border: 2px solid var(--chocolate); }
+
+  /* Bônus. */
+  .bonus { display: grid; gap: 16px; max-width: 860px; margin: 0 auto 26px; }
+  .bonus article { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; align-items: center; background: var(--painel-quente); border-radius: var(--raio-lg); padding: 14px; }
+  .bonus .mini { position: relative; }
+  .bonus .mini img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; }
+  .bonus .mini span { position: absolute; top: -10px; left: -10px; }
+  .bonus .h3 { margin-bottom: 4px; }
+  .incluso { display: inline-block; margin-top: 10px; font: 800 12px/1 var(--texto); text-transform: uppercase; letter-spacing: .05em; padding: 8px 12px; border-radius: 999px; background: var(--folha-suave); color: var(--folha-text); border: 1.5px solid var(--folha); }
+  .faixa { max-width: 860px; margin: 0 auto; background: var(--tangerina); border: 2px solid var(--chocolate); border-radius: var(--raio-md); padding: 18px 22px; text-align: center; font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 800; font-size: clamp(17px, 2vw, 22px); text-transform: uppercase; line-height: 1.15; }
+
+  /* Planos. */
+  .planos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 920px; margin: 0 auto; }
+  .plano { position: relative; background: var(--painel); color: var(--chocolate); border-radius: var(--raio-lg); padding: 30px 26px 28px; display: flex; flex-direction: column; border: 2px solid var(--chocolate); }
+  .plano.top { background: var(--painel-quente); }
+  .plano .adesivo { align-self: center; margin-bottom: 16px; }
+  .plano .canto { position: absolute; top: -16px; right: 18px; }
+  .escuro .plano .h3 { color: var(--chocolate); }
+  .plano .h3 { text-align: center; font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 18px; }
+  .plano ul { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; }
+  .plano li { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: 15px; }
+  .plano li::before { content: ""; background: var(--pistache) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317110e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / 13px no-repeat !important; flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--pistache); font-weight: 800; font-size: 13px; border: 1.5px solid var(--chocolate); }
+  .plano .extra-t { text-align: center; font: 800 13px/1 var(--texto); letter-spacing: .06em; text-transform: uppercase; color: var(--caramelo-escuro); margin: 4px 0 12px; }
+  .plano .extras li::before { content: "PDF"; width: auto; padding: 0 6px; border-radius: 6px; font-size: 10px; background: var(--amarelo); }
+  .plano .pe { margin-top: auto; text-align: center; padding-top: 18px; border-top: 2px dashed var(--linha); }
+  .plano .pe small { display: block; font-weight: 600; color: var(--chocolate-2); }
+  .plano .valor { display: inline-block; font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 900; font-size: clamp(44px, 5vw, 60px); line-height: 1; margin: 8px 0 18px; background: var(--lilas); padding: 10px 18px; border-radius: 18px; border: 2px solid var(--chocolate); }
+  .rodape-oferta { color: var(--escuro-texto); text-align: center; font-size: 13px; max-width: 70ch; margin: 26px auto 0; }
+
+  /* Garantia. */
+  .garantia { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 28px; align-items: center; max-width: 860px; margin: 0 auto; }
+  .escudo { width: 140px; height: 140px; border-radius: 50%; background: var(--folha-suave); border: 2px solid var(--chocolate); display: grid; place-items: center; font-size: 60px; transform: rotate(-6deg); }
+  .garantia .h2 { text-align: left; margin: 10px 0; max-width: none; font-size: clamp(26px, 3vw, 36px); }
+
+  /* Como recebe. */
+  .receber { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .receber div { background: var(--painel-quente); border-radius: var(--raio-md); padding: 22px 14px; text-align: center; }
+  .receber .h3 { font-size: clamp(13px, 1.35vw, 17px); white-space: nowrap; }
+  .receber .txt { font-size: clamp(12px, 1.1vw, 14px); white-space: nowrap; }
+  .receber i { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 18px; background: var(--amarelo); border: 2px solid var(--chocolate); font-style: normal; font-size: 26px; }
+
+  /* FAQ. */
+  .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq details { background: var(--painel-quente); border-radius: 20px; border: 2px solid var(--linha); }
+  .faq details[open] { border-color: var(--chocolate); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 18px 20px; font-weight: 700; font-size: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--tangerina); border: 2px solid var(--chocolate); font-weight: 800; }
+  .faq details[open] summary::after { content: "–"; background: var(--caramelo); color: #fff; }
+  .faq p { margin: 0; padding: 0 20px 18px; }
+  .kicker { display: block; text-align: center; font: 800 12px/1 var(--texto); letter-spacing: .2em; text-transform: uppercase; color: var(--caramelo-escuro); margin-bottom: 10px; }
+
+  footer { text-align: center; padding: 40px 16px 56px; color: var(--chocolate-2); font-size: 13px; }
+  footer strong { display: block; font-family: var(--display); font-variation-settings: "SOFT" 100; font-weight: 900; font-size: 22px; text-transform: uppercase; color: var(--chocolate); margin-bottom: 6px; }
+
+
+  /* Hero: foto centralizada, preço sobreposto à direita (parte para fora), chamada e botão centralizados abaixo. */
+  .hero-grid { display: block; margin-top: 34px; }
+  .hero-foto { position: relative; max-width: 760px; margin: 0 auto; }
+  .hero-foto .preco { position: absolute; right: -72px; top: 50%; transform: translateY(-50%) rotate(4deg); width: auto; min-width: 210px; z-index: 2; background: var(--caramelo); color: #fff; }
+  .hero-foto .preco:hover { transform: translateY(-50%) rotate(1deg) scale(1.04); }
+  .hero-foto .preco::before { background: var(--caramelo); }
+  .hero-foto .preco small { color: #fff; }
+  .hero-foto .preco b { font-size: clamp(30px, 3.4vw, 46px); }
+  .preco b { white-space: nowrap; }
+  .hero-esq { text-align: center; max-width: 640px; margin: 30px auto 0; }
+  .hero-esq .chamada { margin-left: auto; margin-right: auto; }
+  .hero-corpo { text-align: center; }
+  /* EFEITOS */
+  /* Entrada na rolagem: só esconde quando o script marcou a página (sem script, tudo aparece). */
+  .anima .revela { opacity: 0; transform: translateY(28px); transition: opacity 1.14s ease, transform 1.14s cubic-bezier(.22,.61,.36,1); }
+  .anima .revela.entrou { opacity: 1; transform: none; }
+
+  /* Botões: afundam no clique, a seta anda no hover. */
+  .btn .ic-arrow-right { transition: transform 0.5s; }
+  .btn:hover .ic-arrow-right { transform: translateX(4px); }
+  .btn:active { transform: translateY(2px) scale(.98); }
+  .btn.escuro:active { }
+  .btn.off:active { transform: none; }
+
+  /* Adesivos balançam. */
+  .adesivo { transition: transform 0.5s; }
+  .adesivo:hover { animation: balanca 0.95s ease; }
+  @keyframes balanca { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-8deg) scale(1.06); } 60% { transform: rotate(6deg) scale(1.06); } }
+
+  /* Etiqueta de preço pendura e balança. */
+  .preco { transition: transform 0.57s; transform-origin: left center; }
+  .preco:hover { transform: rotate(-3deg) scale(1.04); }
+
+  /* Cartões sobem; a foto gira de leve. */
+  .card, .benef, .receber div, .lista li, .bonus article, .publico .bloco { transition: transform 0.5s cubic-bezier(.22,.61,.36,1), border-color 0.5s; }
+  .card:hover { transform: translateY(-6px); }
+  .card img { transition: transform 0.76s cubic-bezier(.22,.61,.36,1); }
+  .card:hover img { transform: rotate(-6deg) scale(1.06); }
+
+  /* Benefícios, entrega e lista: deslizam e o ícone pula. */
+  .benef:hover { transform: translateX(4px); border-color: var(--tangerina); }
+  .benef i, .receber i { transition: transform 0.5s; }
+  .benef:hover i, .receber div:hover i { transform: rotate(-8deg) scale(1.1); }
+  .receber div:hover { transform: translateY(-6px); }
+  .lista li:hover { transform: translateX(6px); }
+  .bonus article:hover { transform: translateY(-4px); }
+  .publico .bloco:hover { transform: rotate(-1.5deg) translateY(-4px); }
+
+  /* Galeria: foto aproxima no hover. */
+  .trilho img { transition: transform 0.66s, filter 0.66s; }
+  .trilho img:hover { transform: scale(1.03); filter: saturate(1.15); }
+  /* Folga dentro do trilho para a foto ampliada não ser cortada pela área de rolagem. */
+  .trilho { padding: 16px 12px; margin: -16px -12px; scroll-padding-inline: 12px; }
+  .seta { transition: transform 0.5s; }
+  .seta:hover { transform: translate(-2px, -2px); }
+  .seta:active { transform: translateY(2px) scale(.96); }
+
+  /* Planos: sobem com sombra maior. */
+  .plano { transition: transform 0.5s cubic-bezier(.22,.61,.36,1); }
+  .plano:hover { transform: translateY(-6px); }
+
+  /* FAQ: resposta entra deslizando, o + gira. */
+  .faq summary::after { transition: transform 0.5s; }
+  .faq summary:hover::after { transform: rotate(90deg); }
+  .faq details[open] p { animation: desce 0.57s ease; }
+  @keyframes desce { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  /* Escudo da garantia gira devagar no hover. */
+  .escudo { transition: transform 0.76s; }
+  .escudo:hover { transform: rotate(6deg) scale(1.05); }
+
+  /* Faíscas do clique nos botões. */
+  .faisca { position: fixed; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; z-index: 50; animation: faisca 1.14s ease-out forwards; }
+  @keyframes faisca { to { transform: translate(var(--dx), var(--dy)) scale(.2); opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anima .revela { opacity: 1; transform: none; transition: none; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .card:hover, .card:hover img, .benef:hover, .receber div:hover, .lista li:hover, .bonus article:hover, .publico .bloco:hover, .plano:hover, .preco:hover, .escudo:hover, .trilho img:hover { transform: none; }
+  }
+  @media (max-width: 860px) {
+    .hero-foto .preco { right: -6px; top: auto; bottom: -34px; transform: rotate(4deg); width: auto; min-width: 0; padding: 14px 16px; }
+    .hero-foto .preco:hover { transform: rotate(1deg); }
+    .hero-foto .preco::before { display: none; }
+    .hero-esq { margin-top: 52px; }
+    .hero-esq { text-align: center; order: 2; }
+    .hero-foto { order: 1; }
+    .preco { order: 3; max-width: 280px; margin: 0 auto; }
+    .preco::before { left: 50%; top: -14px; transform: translateX(-50%) rotate(135deg); }
+    .hero .stickers { height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 18px; }
+    .hero .stickers .adesivo { position: static; }
+    .c4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .capas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .receber { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .beneficios, .lista, .publico, .planos { grid-template-columns: 1fr; }
+    .c3 { grid-template-columns: 1fr; }
+    .trilho { grid-auto-columns: 80%; }
+    .bonus article { grid-template-columns: 92px minmax(0, 1fr); gap: 14px; }
+    .garantia { grid-template-columns: 1fr; text-align: center; }
+    .escudo { margin: 0 auto; width: 110px; height: 110px; font-size: 48px; }
+    .garantia .h2 { text-align: center; }
+    .card img { width: 62%; }
+    .adesivo { font-size: 12px; padding: 8px 12px; }
+    .receber div { padding: 18px 8px; }
+    .receber .h3 { font-size: 12.5px; letter-spacing: -.01em; }
+    .receber .txt { font-size: 11.5px; white-space: normal; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="topo">Black Friday antecipada · Escolha seu plano e receba seu acesso por e-mail</div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section>
+    <div class="painel hero">
+      <h1 class="h1">Fature até 5 dígitos em dezembro <span>com panetones</span></h1>
+      <div class="stickers"><span class="adesivo lilas s1"><svg class="ic ic-file-text" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /> </svg> Materiais em PDF</span><span class="adesivo tang s2"><svg class="ic ic-mail" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /> </svg> Acesso por e-mail</span></div>
+      <div class="hero-grid">
+        <div class="hero-foto"><div class="preco"><b>R$ 19,90</b><span>Plano Essencial</span><small><svg class="ic ic-list-checks" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /> <path d="M13 6h8" /> <path d="M13 12h8" /> <path d="M13 18h8" /> </svg> Escolha seu plano</small></div><img src="/panetone/hero-panetones-gourmet-4x3.jpg" alt="Isabella Moretti, expert criadora do produto · imagem ilustrativa"></div>
+        <div class="hero-esq">
+          <p class="chamada">Aprenda a montar um plano de produção completo, com ingredientes acessíveis e uma ótima margem de lucro.</p>
+          <a class="btn" href="#oferta">Garantir meu acesso <svg class="ic ic-arrow-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></a>
+        </div>
+      </div>
+      <p class="txt hero-corpo">Tudo organizado em uma área de membros completa, construída para ajudar você a avançar mesmo dedicando poucas horas do seu dia. A meta de faturamento é referência de planejamento, não promessa: os resultados dependem do seu esforço aplicando o passo a passo da maneira correta.</p>
+      <div class="selos"><span><svg class="ic ic-mail" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /> </svg> Acesso por e-mail</span><span><svg class="ic ic-list-checks" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m3 17 2 2 4-4" /> <path d="m3 7 2 2 4-4" /> <path d="M13 6h8" /> <path d="M13 12h8" /> <path d="M13 18h8" /> </svg> Escolha seu plano</span><span><svg class="ic ic-printer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg> Materiais em PDF</span></div>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS + GALERIA -->
+  <section>
+    <div class="painel">
+      <h2 class="h2 longo">Um passo a passo didático e completo com todos os pilares para te acompanhar nesta jornada</h2>
+      <p class="sub">Você pode escolher como começar, seja pelo guia essencial ou pelo nosso plano Premium</p>
+      <div class="beneficios">
+        <div class="benef"><i><svg class="ic ic-chef-hat" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M17 21a1 1 0 0 0 1-1v-5.35c0-.457.316-.844.727-1.041a4 4 0 0 0-2.134-7.589 5 5 0 0 0-9.186 0 4 4 0 0 0-2.134 7.588c.411.198.727.585.727 1.041V20a1 1 0 0 0 1 1Z" /> <path d="M6 17h12" /> </svg></i>Conheça etapas do preparo: fórmulas de referência e orientações de bancada</div>
+        <div class="benef"><i><svg class="ic ic-notebook-pen" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4" /> <path d="M2 6h4" /> <path d="M2 10h4" /> <path d="M2 14h4" /> <path d="M2 18h4" /> <path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /> </svg></i>Registre suas fornadas com a ficha de fornada</div>
+        <div class="benef"><i><svg class="ic ic-cake-slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="9" cy="7" r="2" /> <path d="M7.2 7.9 3 11v9c0 .6.4 1 1 1h16c.6 0 1-.4 1-1v-9c0-2-3-6-7-8l-3.6 2.6" /> <path d="M16 13H3" /> <path d="M16 17H3" /> </svg></i>Explore combinações: caderno com 150 ideias de sabores</div>
+        <div class="benef"><i><svg class="ic ic-calculator" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="16" height="20" x="4" y="2" rx="2" /> <line x1="8" x2="16" y1="6" y2="6" /> <line x1="16" x2="16" y1="14" y2="18" /> <path d="M16 10h.01" /> <path d="M12 10h.01" /> <path d="M8 10h.01" /> <path d="M12 14h.01" /> <path d="M8 14h.01" /> <path d="M12 18h.01" /> <path d="M8 18h.01" /> </svg></i>Organize custos e preço com a folha imprimível</div>
+        <div class="benef"><i><svg class="ic ic-message-circle" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /> </svg></i>Prepare sua comunicação: kit WhatsApp e Instagram</div>
+        <div class="benef"><i><svg class="ic ic-calendar-days" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M8 2v4" /> <path d="M16 2v4" /> <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M3 10h18" /> <path d="M8 14h.01" /> <path d="M12 14h.01" /> <path d="M16 14h.01" /> <path d="M8 18h.01" /> <path d="M12 18h.01" /> <path d="M16 18h.01" /> </svg></i>Planeje o mês de dezembro: pedidos, produção e divulgação</div>
+      </div>
+      <div class="centro"><a class="btn escuro" href="#oferta">Conhecer os planos</a></div>
+      <div class="carrossel">
+        <div class="trilho" id="trilho">
+          <img src="/panetone/panetone-classico.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-bomba-chocolate.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-pistache-amendoas.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-gotas-chocolate.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-ninho-nutella.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-caramelo-amendoas.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-embalados.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-red-velvet.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-brigadeiro-trufado.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-oreo-cremoso.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-doce-leite-nozes.jpg" alt="Imagem ilustrativa">
+          <img src="/panetone/panetone-frutas-vermelhas.jpg" alt="Imagem ilustrativa">
+        </div>
+        <div class="setas">
+          <button class="seta" type="button" data-dir="-1" aria-label="Fotos anteriores"><svg class="ic ic-arrow-left" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /> </svg></button>
+          <div class="pontos" id="pontos"><b class="on"></b><b></b><b></b><b></b></div>
+          <button class="seta" type="button" data-dir="1" aria-label="Próximas fotos"><svg class="ic ic-arrow-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMAS -->
+  <section>
+    <div class="cards c3">
+      <div class="card"><img src="/panetone/panetone-classico.jpg" alt="Imagem ilustrativa"><h3 class="h3">Saiba como preparar de maneira econômica Panetones Deliciosos</h3><p class="txt">Um ponto de partida para economia caso prepare por hobby, e um ponto que aumenta sua margem de lucro caso comece a vender por encomenda ou pronta entrega</p></div>
+      <div class="card"><img src="/panetone/panetone-pistache-amendoas.jpg" alt="Imagem ilustrativa"><h3 class="h3">Tenha acesso a todas combinações já criadas pela Chef Isabella Moretti</h3><p class="txt">Todas as receitas criadas e desenvolvidas pela nossa Chef Italiana, descubra com ela como fazer em casa o verdadeiro e delicioso Panetone que ficou famoso no mundo inteiro</p></div>
+      <div class="card"><img src="/panetone/panetone-embalados.jpg" alt="Imagem ilustrativa"><h3 class="h3">Pedidos, produção e divulgação</h3><p class="txt">Área de membros completa e com todos os materiais com entrega imediata por e-mail, garanta seu acesso ainda hoje com desconto</p></div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section>
+    <div class="painel">
+      <h2 class="h2">Veja os relatos de quem ingressou e já está aplicando</h2>
+      <div class="depo"><img src="/panetone/depoimento-1.jpg" alt="Imagem ilustrativa"><img src="/panetone/depoimento-2.jpg" alt="Imagem ilustrativa"></div>
+      <p class="legenda">Imagem ilustrativa</p>
+    </div>
+  </section>
+
+  <!-- MATERIAIS -->
+  <section>
+    <div class="painel escuro">
+      <h2 class="h2 longo">Acesso completo a todas as receitas e metodologias aplicadas pela Chef Isabella Moretti</h2>
+      <div class="capas">
+        <div class="capa"><img src="/panetone/capa-lucrando.jpg" alt="Lucrando com Panetones. Imagem ilustrativa"><h3 class="h3">Lucrando com Panetones</h3><p class="txt">Aplique a fórmula completa nas etapas do preparo e ficha para registrar cada fornada</p></div>
+        <div class="capa"><img src="/panetone/capa-sabores-v2.jpg" alt="Caderno de 150 Sabores. Imagem ilustrativa"><h3 class="h3">Caderno de 150 Sabores</h3><p class="txt">Combinações para testar na massa escolhida, 150 receitas para escolher qual produzir</p></div>
+        <div class="capa"><img src="/panetone/capa-custos-v2.jpg" alt="Calculadora de Precificação. Imagem ilustrativa"><h3 class="h3">Calculadora de Precificação</h3><p class="txt">Organize seus custos, cenários de preço e ponto de equilíbrio para uma boa margem de lucro</p></div>
+        <div class="capa"><img src="/panetone/capa-comunicacao-v2.jpg" alt="Kit WhatsApp e Instagram. Imagem ilustrativa"><h3 class="h3">Kit WhatsApp &amp; Instagram</h3><p class="txt">Mensagens editáveis, estrutura de perfil e calendário de publicações</p></div>
+        <div class="capa"><img src="/panetone/capa-dezembro-v2.jpg" alt="Plano de Dezembro. Imagem ilustrativa"><h3 class="h3">Plano de Dezembro</h3><p class="txt">Organização de pedidos, capacidade, produção e divulgação para um cenário de meta bruta de 5 dígitos</p></div>
+      </div>
+      <div class="centro" style="margin-top:34px"><a class="btn" href="#oferta">Conhecer os planos</a></div>
+    </div>
+  </section>
+
+  <!-- SABORES + PÚBLICO -->
+  <section>
+    <div class="painel">
+      <h2 class="h2 longo">Produza em casa e lucre ou simplesmente produza os Panetones mais deliciosos como Hobby e surpreenda todos com um sabor inexplicável!</h2>
+      <p class="sub">Prepare com os ingredientes que já tem na cozinha</p>
+      <div class="cards c4">
+        <div class="card"><img src="/panetone/panetone-bomba-chocolate.jpg" alt="Panetone Bomba de Chocolate. Imagem ilustrativa"><h3 class="h3">Panetone Bomba de Chocolate</h3><p class="txt">Ganache intensa, massa macia e cobertura generosa de chocolate.</p></div>
+        <div class="card"><img src="/panetone/panetone-pistache-amendoas.jpg" alt="Pistache com Amêndoas. Imagem ilustrativa"><h3 class="h3">Pistache com Amêndoas</h3><p class="txt">Creme de pistache aveludado com o toque crocante das amêndoas.</p></div>
+        <div class="card"><img src="/panetone/panetone-ninho-nutella.jpg" alt="Ninho com Creme de Avelã. Imagem ilustrativa"><h3 class="h3">Ninho com Creme de Avelã</h3><p class="txt">Recheio cremoso de leite em pó com um centro de chocolate e avelã.</p></div>
+        <div class="card"><img src="/panetone/panetone-oreo-cremoso.jpg" alt="Oreo Cremoso. Imagem ilustrativa"><h3 class="h3">Oreo Cremoso</h3><p class="txt">Creme de baunilha, biscoito de chocolate e uma cobertura irresistível.</p></div>
+        <div class="card"><img src="/panetone/panetone-red-velvet.jpg" alt="Red Velvet com Chocolate Branco. Imagem ilustrativa"><h3 class="h3">Red Velvet com Chocolate Branco</h3><p class="txt">Massa vermelha, creme suave e raspas delicadas de chocolate branco.</p></div>
+        <div class="card"><img src="/panetone/panetone-brigadeiro-trufado.jpg" alt="Brigadeiro Trufado. Imagem ilustrativa"><h3 class="h3">Brigadeiro Trufado</h3><p class="txt">Brigadeiro cremoso no recheio e chocolate em cada pedaço.</p></div>
+        <div class="card"><img src="/panetone/panetone-doce-leite-nozes.jpg" alt="Doce de Leite com Nozes. Imagem ilustrativa"><h3 class="h3">Doce de Leite com Nozes</h3><p class="txt">Doce de leite aveludado equilibrado com nozes tostadas.</p></div>
+        <div class="card"><img src="/panetone/panetone-frutas-vermelhas.jpg" alt="Frutas Vermelhas e Chocolate Branco. Imagem ilustrativa"><h3 class="h3">Frutas Vermelhas &amp; Chocolate Branco</h3><p class="txt">Frutas levemente ácidas com a delicadeza do chocolate branco.</p></div>
+      </div>
+      <p class="legenda">Inspire-se em combinações clássicas e gourmets para escolher o próximo panetone da sua fornada. Imagens ilustrativas.</p>
+      <div class="publico">
+        <div class="bloco"><h3 class="h3"><svg class="ic ic-piggy-bank" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z" /> <path d="M2 9v1c0 1.1.9 2 2 2h1" /> <path d="M16 11h.01" /> </svg> Lucre até 5 dígitos em dezembro sem sair de casa</h3><p class="txt">Organize suas ideias, mapeie sua estratégia, custos e comunicação usando todos os materiais disponíveis em nossa área de membros</p></div>
+        <div class="bloco"><h3 class="h3"><svg class="ic ic-house" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg> Faça para família e amigos</h3><p class="txt">Use o guia e as referências de preparo em nossa área de membros e aplique em casa para surpreender a todos com essa surpresa deliciosa</p></div>
+      </div>
+      <div class="centro" style="margin-top:30px"><a class="btn" href="#oferta">Conhecer os planos</a></div>
+    </div>
+  </section>
+
+  <!-- PERFEITO PARA -->
+  <section>
+    <div class="painel">
+      <h2 class="h2">Esse treinamento é perfeito para você que:</h2>
+      <ul class="lista" style="margin-top:28px">
+        <li>Está cansado de doces sem graça genéricos</li>
+        <li>Já consegue imaginar as encomendas sendo feitas</li>
+        <li>Está disposto a aplicar todo o passo a passo para ter sucesso</li>
+        <li>Gosta de aproveitar oportunidades de fazer uma boa renda extra</li>
+        <li>Cansou de procurar ideias e nunca sabe o que seguir</li>
+        <li>Gosta de direcionamento e organização</li>
+        <li>Quer agradar a família fazendo receitas deliciosas</li>
+        <li>Gostaria de presentear pessoas próximas com panetones inesquecíveis</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BÔNUS -->
+  <section>
+    <div class="painel">
+      <div class="centro" style="margin-bottom:16px"><span class="adesivo tang"><svg class="ic ic-package" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7" /> <path d="m7.5 4.27 9 5.15" /> </svg> Ingressando ainda hoje</span></div>
+      <h2 class="h2">Compre agora e receba <span style="color:var(--accent)">+4 bônus exclusivos</span></h2>
+      <div class="bonus" style="margin-top:30px">
+        <article><div class="mini"><img src="/panetone/capa-custos-v2.jpg" alt="Calculadora de Precificação. Imagem ilustrativa"><span class="adesivo lilas">PDF 1</span></div><div><h3 class="h3">Calculadora de Precificação</h3><p class="txt">Organize ingredientes, embalagem, custos e cenários de preço.</p><span class="incluso"><svg class="ic ic-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg> No plano Completo</span></div></article>
+        <article><div class="mini"><img src="/panetone/capa-comunicacao-v2.jpg" alt="Kit WhatsApp e Instagram. Imagem ilustrativa"><span class="adesivo lilas">PDF 2</span></div><div><h3 class="h3">Kit WhatsApp &amp; Instagram</h3><p class="txt">Mensagens editáveis, estrutura de perfil e calendário de publicações.</p><span class="incluso"><svg class="ic ic-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg> No plano Completo</span></div></article>
+        <article><div class="mini"><img src="/panetone/capa-sabores-v2.jpg" alt="Caderno de 150 Sabores. Imagem ilustrativa"><span class="adesivo lilas">PDF 3</span></div><div><h3 class="h3">Caderno de 150 Sabores</h3><p class="txt">Combinações para escolher e testar na massa que você utiliza.</p><span class="incluso"><svg class="ic ic-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg> No plano Completo</span></div></article>
+        <article><div class="mini"><img src="/panetone/capa-dezembro-v2.jpg" alt="Plano de Dezembro. Imagem ilustrativa"><span class="adesivo lilas">PDF 4</span></div><div><h3 class="h3">Plano de Dezembro</h3><p class="txt">Organize pedidos, capacidade, produção e divulgação em um cenário de planejamento.</p><span class="incluso"><svg class="ic ic-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg> No plano Completo</span></div></article>
+      </div>
+      <div class="faixa">Os quatro materiais complementares fazem parte do Plano Completo.</div>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section id="oferta">
+    <div class="painel escuro">
+      <h2 class="h2">Escolha o pacote que combina com seu momento.</h2>
+      <p class="sub" style="color:var(--escuro-texto)">Black Friday antecipada · Duas opções de materiais digitais para explorar o preparo, a venda ou a cozinha por hobby.</p>
+      <div class="planos">
+        <article class="plano">
+          <span class="adesivo pist"><svg class="ic ic-zap" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /> </svg> Essencial</span>
+          <h3 class="h3">O guia para começar</h3>
+          <ul>
+            <li>Ebook Panetones para Vender</li>
+            <li>Duas fórmulas de referência</li>
+            <li>Orientações de bancada e etapas de produção</li>
+            <li>Ficha de fornada e sugestões para um primeiro cardápio</li>
+          </ul>
+          <div class="pe"><small>Preço deste plano</small><span class="valor">R$ 19,90</span><br><span class="btn off" role="button" aria-disabled="true">Em breve</span></div>
+        </article>
+        <article class="plano top">
+          <span class="adesivo lilas canto">Completo</span>
+          <span class="adesivo tang"><svg class="ic ic-flame" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" /> </svg> Plano Completo</span>
+          <h3 class="h3">Os cinco materiais do pacote</h3>
+          <ul>
+            <li>Panetones para Vender + Caderno de 150 Sabores</li>
+            <li>Folha imprimível de custos e preço</li>
+            <li>Kit de mensagens para WhatsApp e Instagram</li>
+            <li>Plano de dezembro com cenário de meta bruta de 5 dígitos</li>
+          </ul>
+          <p class="extra-t">Materiais complementares</p>
+          <ul class="extras">
+            <li>Calculadora de Precificação</li>
+            <li>Kit WhatsApp &amp; Instagram</li>
+            <li>Caderno de 150 Sabores</li>
+            <li>Plano de Dezembro</li>
+          </ul>
+          <div class="pe"><small>Preço deste plano</small><span class="valor">R$ 47,90</span><br><span class="btn off" role="button" aria-disabled="true">Em breve</span></div>
+        </article>
+      </div>
+      <p class="rodape-oferta">As combinações e fórmulas são referências que precisam ser testadas. A meta de R$ 7.000 é um cenário de planejamento de faturamento bruto, não uma promessa de resultado.</p>
+    </div>
+  </section>
+
+  <!-- GARANTIA -->
+  <section>
+    <div class="painel">
+      <div class="garantia">
+        <div class="escudo" aria-hidden="true"><svg class="ic ic-shield-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg></div>
+        <div>
+          <span class="adesivo pist"><svg class="ic ic-shield-check" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg> PLACEHOLDER</span>
+          <h2 class="h2">Condição de reembolso</h2>
+          <p class="txt just">Prazo, canal e regra de reembolso ainda não foram publicados. Esta página não promete garantia de 15 dias nem devolução automática. A condição entra no checkout quando for confirmada.</p>
+          <div style="margin-top:20px"><a class="btn" href="#oferta">Seguir para o checkout</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO RECEBE -->
+  <section>
+    <div class="painel">
+      <h2 class="h2">Conteúdo digital <span style="color:var(--accent)">em PDF</span></h2>
+      <p class="sub">O guia e os materiais do Plano Completo são arquivos digitais. O prazo e o canal de acesso serão apresentados quando as condições da oferta estiverem definidas.</p>
+      <div class="receber">
+        <div><i><svg class="ic ic-smartphone" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /> </svg></i><h3 class="h3">No celular</h3><p class="txt">Abra onde estiver</p></div>
+        <div><i><svg class="ic ic-laptop" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16" /> </svg></i><h3 class="h3">No computador</h3><p class="txt">Tela grande para consultar</p></div>
+        <div><i><svg class="ic ic-printer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /> <path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /> <rect x="6" y="14" width="12" height="8" rx="1" /> </svg></i><h3 class="h3">Para imprimir</h3><p class="txt">Folhas na bancada da cozinha</p></div>
+        <div><i><svg class="ic ic-file-text" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /> <path d="M14 2v4a2 2 0 0 0 2 2h4" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /> </svg></i><h3 class="h3">Em PDF</h3><p class="txt">Materiais digitais</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="painel">
+      <span class="kicker">FAQ</span>
+      <h2 class="h2">Perguntas frequentes</h2>
+      <div class="faq" style="margin-top:26px">
+        <details open><summary>É um curso em vídeo?</summary><p class="txt just">Não. A oferta é composta por materiais digitais em PDF.</p></details>
+        <details><summary>Posso usar os materiais por hobby?</summary><p class="txt just">Sim. O conteúdo também pode servir a quem gosta de cozinhar e quer preparar panetones em casa.</p></details>
+        <details><summary>O que muda entre os planos?</summary><p class="txt just">O Plano Essencial inclui o ebook principal. O Plano Completo reúne esse guia e os quatro materiais complementares apresentados nesta página.</p></details>
+        <details><summary>O plano garante vendas ou renda?</summary><p class="txt just">Não. Os materiais não garantem pedidos, lucro, renda ou resultado culinário específico. A meta de R$ 7.000 é um cenário de planejamento de faturamento bruto.</p></details>
+        <details><summary>As combinações e fórmulas foram validadas?</summary><p class="txt just">São referências que precisam ser testadas na sua cozinha antes de serem tratadas como receitas validadas.</p></details>
+        <details><summary>Como receberei os arquivos?</summary><p class="txt just">Os materiais são digitais em PDF. O canal e o prazo de acesso serão informados quando a oferta e o checkout estiverem configurados.</p></details>
+      </div>
+      <div class="centro" style="margin-top:30px"><a class="btn escuro" href="#oferta">Ver planos e valores</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>Panetones para Vender</strong>
+  © 2026 Todos os direitos reservados.<br>
+  Panetones para Vender · Materiais digitais sobre o preparo e a organização de panetones.
+</footer>
+
+<script>
+  (function () {
+    var t = document.getElementById("trilho"), dots = [].slice.call(document.querySelectorAll("#pontos b"));
+    function page() { var w = t.clientWidth; return w ? Math.round(t.scrollLeft / w) : 0; }
+    function mark() { var n = Math.max(1, Math.ceil(t.scrollWidth / t.clientWidth)), p = page(); dots.forEach(function (d, i) { d.className = i === Math.min(p, dots.length - 1) ? "on" : ""; d.style.display = i < n ? "" : "none"; }); }
+    [].forEach.call(document.querySelectorAll(".seta"), function (b) {
+      b.addEventListener("click", function () { t.scrollBy({ left: t.clientWidth * Number(b.dataset.dir), behavior: "smooth" }); });
+    });
+    t.addEventListener("scroll", function () { window.requestAnimationFrame(mark); });
+    window.addEventListener("resize", mark); mark();
+    // Capas: inclinam e deslizam na direção do mouse; voltam ao lugar ao sair.
+    var fino = window.matchMedia("(hover: hover) and (pointer: fine)");
+    var calmo = window.matchMedia("(prefers-reduced-motion: reduce)");
+    [].forEach.call(document.querySelectorAll(".capa"), function (c) {
+      var img = c.querySelector("img");
+      c.addEventListener("mousemove", function (e) {
+        if (!fino.matches || calmo.matches) return;
+        var r = c.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        img.style.transform = "translate(" + (x * 14).toFixed(1) + "px," + (y * 14).toFixed(1) + "px) rotateY(" + (x * 16).toFixed(1) + "deg) rotateX(" + (-y * 16).toFixed(1) + "deg) scale(1.05)";
+      });
+      c.addEventListener("mouseleave", function () { img.style.transform = ""; });
+    });
+    // Entrada na rolagem: painéis, cartões e blocos aparecem ao entrar na tela.
+    var calmo2 = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if ("IntersectionObserver" in window && !calmo2.matches) {
+      var alvos = document.querySelectorAll(".painel, .cards .card, .benef, .lista li, .bonus article, .plano, .receber > div, .capa");
+      [].forEach.call(alvos, function (el, i) { el.classList.add("revela"); el.style.transitionDelay = ((i % 4) * 70) + "ms"; });
+      document.documentElement.classList.add("anima");
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("entrou"); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      [].forEach.call(alvos, function (el) { io.observe(el); });
+    }
+    // Faíscas nas cores da marca ao clicar num botão.
+    var cores = ["#d9380f", "#f97316", "#65a30d", "#17110e"];
+    [].forEach.call(document.querySelectorAll(".btn:not(.off), .seta"), function (b) {
+      b.addEventListener("click", function (e) {
+        if (calmo2.matches) return;
+        for (var k = 0; k < 10; k++) {
+          var s = document.createElement("span"), a = (Math.PI * 2 * k) / 10, d = 34 + Math.random() * 26;
+          s.className = "faisca";
+          s.style.left = (e.clientX - 4) + "px"; s.style.top = (e.clientY - 4) + "px";
+          s.style.background = cores[k % cores.length];
+          s.style.setProperty("--dx", (Math.cos(a) * d).toFixed(1) + "px");
+          s.style.setProperty("--dy", (Math.sin(a) * d).toFixed(1) + "px");
+          document.body.appendChild(s);
+          setTimeout(function (n) { n.remove(); }, 1200, s);
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
