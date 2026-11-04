@@ -134,8 +134,10 @@
   .card .tag { display: inline-block; font: 700 12px/1 var(--texto); text-transform: uppercase; letter-spacing: .05em; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--chocolate); background: var(--painel); }
 
   /* Depoimentos. */
-  .depo { display: flex; gap: 18px; justify-content: center; overflow-x: auto; scroll-snap-type: x mandatory; }
-  .depo img { width: min(280px, 72%); flex: none; border-radius: var(--raio-md); scroll-snap-align: center; border: 1px solid var(--linha); }
+  .depo { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 2px; }
+  .depo::-webkit-scrollbar { display: none; }
+  .depo img { height: 540px; width: auto; max-width: none; flex: none; border-radius: var(--raio-md); scroll-snap-align: start; border: 1px solid var(--linha); background: var(--painel); }
+  .depo-wrap { margin-top: 30px; }
 
   /* Bloco escuro de materiais. */
   .escuro { background: var(--chocolate); color: var(--creme); }
@@ -322,6 +324,7 @@
     .garantia .h2 { text-align: center; }
     .card img { width: 62%; }
     .adesivo { font-size: 12px; padding: 8px 12px; }
+    .depo img { height: 440px; }
     .receber div { padding: 18px 8px; }
     .receber .h3 { font-size: 12.5px; letter-spacing: -.01em; }
     .receber .txt { font-size: 11.5px; white-space: normal; }
@@ -403,8 +406,20 @@
   <section>
     <div class="painel">
       <h2 class="h2">Veja os relatos de quem ingressou e já está aplicando</h2>
-      <div class="depo"><img src="/panetone/depoimento-1.jpg" alt="Imagem ilustrativa"><img src="/panetone/depoimento-2.jpg" alt="Imagem ilustrativa"></div>
-      <p class="legenda">Imagem ilustrativa</p>
+      <div class="depo-wrap">
+        <div class="depo" id="depo">
+          <img src="/panetone/depo-gabriela.jpg" alt="Conversa de WhatsApp com Gabriela Aluna sobre o material" loading="lazy">
+          <img src="/panetone/depo-matheus.jpg" alt="Conversa de WhatsApp com Matheus Oliveira sobre o material" loading="lazy">
+          <img src="/panetone/depo-fernanda.jpg" alt="Conversa de WhatsApp com Fernanda Souza sobre o material" loading="lazy">
+          <img src="/panetone/depo-vanessa.jpg" alt="Conversa de WhatsApp com Vanessa Pereira sobre o material" loading="lazy">
+          <img src="/panetone/depo-rafael.jpg" alt="Conversa de WhatsApp com Rafael Campos sobre o material" loading="lazy">
+        </div>
+        <div class="setas">
+          <button class="seta" type="button" data-dir="-1" data-alvo="depo" aria-label="Depoimentos anteriores"><svg class="ic ic-arrow-left" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m12 19-7-7 7-7" /> <path d="M19 12H5" /> </svg></button>
+          <div class="pontos" id="pontos-depo"><b class="on"></b><b></b><b></b><b></b><b></b></div>
+          <button class="seta" type="button" data-dir="1" data-alvo="depo" aria-label="Próximos depoimentos"><svg class="ic ic-arrow-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -578,11 +593,25 @@
     var t = document.getElementById("trilho"), dots = [].slice.call(document.querySelectorAll("#pontos b"));
     function page() { var w = t.clientWidth; return w ? Math.round(t.scrollLeft / w) : 0; }
     function mark() { var n = Math.max(1, Math.ceil(t.scrollWidth / t.clientWidth)), p = page(); dots.forEach(function (d, i) { d.className = i === Math.min(p, dots.length - 1) ? "on" : ""; d.style.display = i < n ? "" : "none"; }); }
-    [].forEach.call(document.querySelectorAll(".seta"), function (b) {
+    [].forEach.call(document.querySelectorAll(".seta:not([data-alvo])"), function (b) {
       b.addEventListener("click", function () { t.scrollBy({ left: t.clientWidth * Number(b.dataset.dir), behavior: "smooth" }); });
     });
     t.addEventListener("scroll", function () { window.requestAnimationFrame(mark); });
     window.addEventListener("resize", mark); mark();
+    // Depoimentos: setas rolam ~80% da largura; pontos marcam o print mais à esquerda.
+    var dp = document.getElementById("depo"), dd = [].slice.call(document.querySelectorAll("#pontos-depo b")), prints = [].slice.call(dp.querySelectorAll("img"));
+    function marcaDepo() {
+      var a = 0, menor = 1e9;
+      prints.forEach(function (im, i) { var d = Math.abs(im.offsetLeft - dp.offsetLeft - dp.scrollLeft); if (d < menor) { menor = d; a = i; } });
+      if (dp.scrollLeft + dp.clientWidth >= dp.scrollWidth - 4) a = prints.length - 1;
+      dd.forEach(function (d, i) { d.className = i === a ? "on" : ""; });
+    }
+    [].forEach.call(document.querySelectorAll(".seta[data-alvo=depo]"), function (b) {
+      b.addEventListener("click", function () { dp.scrollBy({ left: dp.clientWidth * 0.8 * Number(b.dataset.dir), behavior: "smooth" }); });
+    });
+    dd.forEach(function (d, i) { d.style.cursor = "pointer"; d.addEventListener("click", function () { dp.scrollTo({ left: prints[i].offsetLeft - dp.offsetLeft, behavior: "smooth" }); }); });
+    dp.addEventListener("scroll", function () { window.requestAnimationFrame(marcaDepo); });
+    window.addEventListener("resize", marcaDepo); marcaDepo();
     // Capas: inclinam e deslizam na direção do mouse; voltam ao lugar ao sair.
     var fino = window.matchMedia("(hover: hover) and (pointer: fine)");
     var calmo = window.matchMedia("(prefers-reduced-motion: reduce)");
